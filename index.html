@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Cutie Stuti ❤️</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="heartsCanvas"></canvas>
+
+  <!-- Page 1 -->
+  <div class="page active" id="page1">
+    <div class="content">
+      <h1>🥰 HEYYYY CUTIEEEE PIEEEE 🥰</h1>
+      <h2>I LOVE YOU STUTI ❤️</h2>
+      <button onclick="nextPage(2)" class="cute-btn">Let's continue</button>
+    </div>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page" id="page2">
+    <div class="content">
+      <h1>You think you're not cute???</h1>
+      <h2>Let's check now</h2>
+      <p>Press below to check your cuteness percentage</p>
+      <button onclick="nextPage(3)" class="cute-btn big">CUTE</button>
+    </div>
+  </div>
+
+  <!-- Page 3 -->
+  <div class="page" id="page3">
+    <div class="content">
+      <h1>Calculating...</h1>
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <button id="checkBtn" onclick="nextPage(4)" class="cute-btn" style="display:none;">Check results</button>
+    </div>
+  </div>
+
+  <!-- Page 4 -->
+  <div class="page" id="page4">
+    <div class="content">
+      <h1>Damn baby you're cuteness cannot be measured</h1>
+      <h2>♾️ % CUTE</h2>
+      <div class="emoji">😁</div>
+      <button onclick="nextPage(5)" class="cute-btn">Next</button>
+    </div>
+  </div>
+
+  <!-- Page 5 -->
+  <div class="page" id="page5">
+    <div class="content">
+      <h1>I LOVEE YOUU SOO MUCHH BABYYYY 💗</h1>
+      <h2>I WANT YOU AND ONLY YOU FOREVER ♾️</h2>
+      <h3>BYEEEE HAVE FUNNNN 😋😘😍🥰</h3>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
