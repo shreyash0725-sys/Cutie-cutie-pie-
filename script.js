@@ -1,34 +1,46 @@
 const pages = document.querySelectorAll('.page');
+let hearts = [];
 
-// Create single heart
+// Smooth heart animation
 function createHeart() {
   const heart = document.createElement('div');
-  heart.textContent = ['💗', '💕', '💖', '❤️', '🥰'][Math.floor(Math.random()*5)];
+  heart.textContent = ['💗', '💕', '💖', '❤️', '🥰'][Math.floor(Math.random() * 5)];
   heart.style.position = 'absolute';
   heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.fontSize = Math.random() * 25 + 18 + 'px';
-  heart.style.opacity = Math.random() * 0.6 + 0.4;
+  heart.style.fontSize = Math.random() * 22 + 18 + 'px';
+  heart.style.opacity = Math.random() * 0.5 + 0.4;
   heart.style.zIndex = 2;
+  heart.style.userSelect = 'none';
   document.body.appendChild(heart);
+  
+  let y = window.innerHeight + 50;
+  let x = parseFloat(heart.style.left);
+  const speed = Math.random() * 1.8 + 1.2;
+  const sway = Math.random() * 0.8 + 0.4;
 
-  let y = window.innerHeight;
-  const speed = Math.random() * 2.5 + 1.5;
+  hearts.push(heart);
 
-  const animate = setInterval(() => {
+  function animate() {
     y -= speed;
-    heart.style.top = y + 'px';
-    heart.style.transform = `rotate(${Math.random()*20-10}deg)`;
+    x += Math.sin(y / 30) * sway;
     
-    if (y < -100) {
-      clearInterval(animate);
+    heart.style.top = y + 'px';
+    heart.style.left = x + 'vw';
+    heart.style.transform = `rotate(${Math.sin(y / 20) * 15}deg)`;
+
+    if (y > -100) {
+      requestAnimationFrame(animate);
+    } else {
       heart.remove();
+      hearts = hearts.filter(h => h !== heart);
     }
-  }, 40);
+  }
+  animate();
 }
 
 function launchConfetti() {
-  for (let i = 0; i < 35; i++) {   // Reduced from 80 to 35
-    setTimeout(() => createHeart(), i * 35);
+  for (let i = 0; i < 25; i++) {        // Even fewer
+    setTimeout(() => createHeart(), i * 40);
   }
 }
 
@@ -38,23 +50,23 @@ function nextPage(pageNum) {
   document.getElementById(`page${pageNum}`).classList.add('active');
   launchConfetti();
 
-  // Progress Bar on Page 3
   if (pageNum === 3) {
     setTimeout(() => {
       const bar = document.getElementById('progressBar');
       bar.style.width = '100%';
-      
       setTimeout(() => {
         document.getElementById('checkBtn').style.display = 'block';
       }, 3200);
-    }, 500);
+    }, 400);
   }
 }
 
-// Fewer background hearts (much slower now)
+// Very light background hearts
 setInterval(() => {
-  if (Math.random() > 0.75) createHeart();   // Reduced frequency
-}, 800);   // Slower spawn rate
+  if (hearts.length < 8 && Math.random() > 0.6) {   // Max 8 hearts at once
+    createHeart();
+  }
+}, 1200);
 
-// Start first page
+// Initialize
 document.getElementById('page1').classList.add('active');
